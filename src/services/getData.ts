@@ -1,4 +1,4 @@
-export default async function api(url){
+export default async function api(url: string){
     return fetch(url, {
         method: 'GET',
         headers: {'content-type':'application/json'}

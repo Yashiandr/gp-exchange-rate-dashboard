@@ -1,37 +1,33 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { StyleDashboard } from "./Dashboard.style";
 import { ChoiceCurrency } from "../ChoiseCurrency/ChoiseCurrency";
 import { filterDataBySymbol } from "../../utils/formatData";
+import { ReactECharts } from "../../Echarts/ReactECharts";
+import { IFormatData } from "../../utils/DataInterface";
+import { makeOption } from "../../utils/makeOption";
 
 type Item = string
 const items: Item[] = ['$', '€', '¥']
 
-interface IFormatData {
-  title: string;
-  description: string;
-  yData: Array<number>;
-  xData: Array<string>;
-  average: string;
-}
 
-export const Dashboard = ({ data }) => {
+export const Dashboard = ({ data }:any) => {
     const [ valueC, setValueC ] = useState<Item | null>(items[0]);
-    const formatData: IFormatData = filterDataBySymbol(valueC, data);
+    const [ formatData, setFormatData ] = useState<IFormatData | undefined>();
+    let option = useRef<any>(makeOption(formatData))
 
+    useEffect(() => {
+        setFormatData(filterDataBySymbol(valueC, data))
+    }, [valueC, data])
+    option.current = makeOption(formatData)
     return (
-        <StyleDashboard>
-            <div>
-                <h1>{formatData.title}</h1>
-                <p>Список дат: {formatData.xData.join(', ')}</p>
-                <p>Список значений: {formatData.yData.join(', ')}</p>
-                <p>Среднее: {formatData.average}</p>
-            </div>
-            <ChoiceCurrency
-            value = {valueC}
-            setValue={setValueC}
-            items={items}
-            />
-
-        </StyleDashboard>
+          <StyleDashboard>
+              <ReactECharts option={option.current} />
+              <ChoiceCurrency
+              value = {valueC}
+              setValue={setValueC}
+              items={items}
+              />
+          </StyleDashboard>
     )
-}
+  }
+    

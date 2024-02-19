@@ -18,7 +18,9 @@ export const ChoiceCurrency: React.FC<Props> =  ({ value, setValue, items }) => 
             getItemLabel={(item: string) => item}
             multiple={false}
             style={{
-                alignSelf: 'flex-start',
+                position: 'absolute',
+                top: '.5rem',
+                right: '.5rem',
             }}
             name="ChoiceCurrency"
         />
