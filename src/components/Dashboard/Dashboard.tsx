@@ -7,10 +7,11 @@ import { IFormatData } from "../../utils/DataInterface";
 import { makeOption } from "../../utils/makeOption";
 
 type Item = string
-const items: Item[] = ['$', '€', '¥']
 
 
 export const Dashboard = ({ data }:any) => {
+    const items: Item[] = ['$', '€', '¥']
+    
     const [ valueC, setValueC ] = useState<Item | null>(items[0]);
     const [ formatData, setFormatData ] = useState<IFormatData | undefined>();
     let option = useRef<any>(makeOption(formatData))
