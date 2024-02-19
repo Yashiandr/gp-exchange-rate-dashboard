@@ -2,14 +2,8 @@ import React from 'react';
 import { Theme, presetGpnDefault } from '@consta/uikit/Theme';
 import GlobalStyles from './globalStyles';
 import { Dashboard } from './components/Dashboard/Dashboard';
-import getData from './services/getData'
-
-interface IData {
-    date: string;
-    month: string;
-    indicator: string;
-    value: number;
-}
+import getData from './services/getData';
+import { IData } from './utils/DataInterface';
 
 const data: IData = await getData('https://65d15239ab7beba3d5e449ae.mockapi.io/rate');
 

@@ -43,7 +43,7 @@ export function  makeOption(settings: IFormatData | undefined){
     xAxis: {
       type: 'category',
       boundaryGap: false,
-      data: settings.xData,
+      data: [...settings.data.keys()],
       tooltip:{
         textStyle:{
           fontWeight: 'bold',
@@ -57,7 +57,7 @@ export function  makeOption(settings: IFormatData | undefined){
     },
     series: [
       {
-        data: settings.yData,
+        data: [...settings.data.values()],
         name: settings.description,
         symbol: 'none',
         smooth: 0.15,
