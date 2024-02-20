@@ -1,5 +1,7 @@
 import React from 'react';
 import { ChoiceGroup } from '@consta/uikit/ChoiceGroup';
+import { useDispatch } from 'react-redux';
+import { setCurrency } from '../../store/chartSlice';
 
 
 type Props = {
@@ -9,10 +11,14 @@ type Props = {
 }
 
 export const ChoiceCurrency: React.FC<Props> =  ({ charPoint, setCharPoint, charCurrencies }) => {
+    const handleChange = (event: any) => {
+        setCharPoint(event.value);
+    }
+
     return (
         <ChoiceGroup
             value={charPoint}
-            onChange={({ value }) => setCharPoint(value)}
+            onChange={handleChange}
             size='xs'
             items={charCurrencies}
             getItemLabel={(value: string) => value}

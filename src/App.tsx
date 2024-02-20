@@ -1,17 +1,28 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Theme, presetGpnDefault } from '@consta/uikit/Theme';
 import GlobalStyles from './globalStyles';
 import { Dashboard } from './components/Dashboard/Dashboard';
-import getData from './services/getData';
-import { IData } from './utils/DataInterface';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectData } from './store/selectors';
+import { fetchData } from './store/thunk';
 
-const data: IData = await getData('https://65d15239ab7beba3d5e449ae.mockapi.io/rate');
 
 function App() {
+  const dispatch: any = useDispatch();
+  const data = useSelector(selectData)
+
+  useEffect(() => {
+    dispatch(fetchData());
+  },[dispatch])
+
+  if (data === '') {
+    return ''
+  }
+
   return (
   <Theme preset={presetGpnDefault}>
     <GlobalStyles />
-    <Dashboard data={data}/>
+    <Dashboard/>
   </Theme>
   );
 }
