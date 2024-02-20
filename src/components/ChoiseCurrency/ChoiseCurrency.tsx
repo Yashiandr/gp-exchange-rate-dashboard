@@ -1,7 +1,5 @@
 import React from 'react';
 import { ChoiceGroup } from '@consta/uikit/ChoiceGroup';
-import { useDispatch } from 'react-redux';
-import { setCurrency } from '../../store/chartSlice';
 
 
 type Props = {
